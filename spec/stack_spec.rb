@@ -1,7 +1,7 @@
 require_relative '../stacks.rb'
 
-describe StackLL do
-  let(:stack) { StackLL.new }
+describe StackAsLinkedList do
+  let(:stack) { StackAsLinkedList.new }
 
   describe '#push' do
     it 'updates top to pushed item when stack empty' do
