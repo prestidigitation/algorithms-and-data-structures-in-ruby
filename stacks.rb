@@ -34,6 +34,7 @@ require_relative 'node'
 # end
 
 
+# Stack implementation using Linked Lists
 class StackLL
   def initialize
     @top = nil
