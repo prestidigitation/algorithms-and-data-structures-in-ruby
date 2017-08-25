@@ -44,17 +44,29 @@ class StackLL
   end
 
   def pop
-    raise "Stack is empty" if is_empty?
+    raise "Stack is empty" if empty?
     data = @top.data
     @top = @top.next_node
     data
   end
 
-  def is_empty?
+  # The only necessary methods are push and pop. All of the following are convenience methods.
+
+  def empty?
     @top.nil?
   end
 
   def peek
     @top.data
+  end
+
+  def height
+    counter = 0
+    current_node = @top
+    while !current_node.nil?
+      counter += 1
+      current_node = current_node.next_node
+    end
+    counter
   end
 end
