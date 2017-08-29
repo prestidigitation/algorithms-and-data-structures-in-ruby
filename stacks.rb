@@ -1,40 +1,36 @@
 require_relative 'node'
 
-# class Stack
-#   def initialize(max_size = nil)
-#     @stack = Array.new
-#     @max_size = max_size
-#   end
-#
-#   def push(data)
-#     @stack << item
-#   end
-#
-#   def pop
-#     @stack.pop
-#   end
-#
-#   def peek
-#
-#   end
-#
-#   def size
-#     @stack.size
-#   end
-#
-#   private
-#
-#   def full?
-#
-#   end
-#
-#   def empty?
-#     self.size == 0
-#   end
-# end
+
+# Stack implementation using Array
+class StackAsArray
+  def initialize
+    @stack = Array.new
+  end
+
+  def push(data)
+    @stack.push(data)
+  end
+
+  def pop
+    raise "Stack is empty" if empty?
+    @stack.pop
+  end
+
+  def empty?
+    self.height == 0
+  end
+
+  def peek
+    @stack[-1]
+  end
+
+  def height
+    @stack.size
+  end
+end
 
 
-# Stack implementation using Linked Lists
+# Stack implementation using Linked List
 class StackAsLinkedList
   def initialize
     @top = nil
@@ -61,6 +57,7 @@ class StackAsLinkedList
     @top.data
   end
 
+  # height method iterates through all nodes when called, so takes O(n) time. Could alternatively have a counter class variable that gets incremented or decremented when pushing or popping elements, so that checking height takes O(1) time.
   def height
     counter = 0
     current_node = @top
