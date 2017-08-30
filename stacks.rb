@@ -58,15 +58,6 @@ class StackAsLinkedList
   end
 
   # The only necessary methods are push and pop. All of the following are convenience methods.
-
-  def empty?
-    @top.nil?
-  end
-
-  def full?
-    height == @max_size
-  end
-
   def peek
     @top.data
   end
@@ -80,5 +71,15 @@ class StackAsLinkedList
       current_node = current_node.next_node
     end
     counter
+  end
+
+  private
+  
+  def empty?
+    @top.nil?
+  end
+
+  def full?
+    height == @max_size
   end
 end
