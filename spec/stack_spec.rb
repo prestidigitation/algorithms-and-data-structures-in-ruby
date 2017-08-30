@@ -4,6 +4,12 @@ describe StackAsArray do
   let(:stack) { StackAsArray.new }
 
   describe '#push' do
+    it 'raises error if stack is full' do
+      stack = StackAsArray.new(25)
+      25.times {stack.push('test')}
+      expect{stack.push('test')}.to raise_error('Stack is full')
+    end
+
     it 'updates top to pushed item when stack empty' do
       stack.push('testing123')
       expect(stack.pop).to eq 'testing123'
@@ -88,10 +94,17 @@ describe StackAsArray do
   end
 end
 
+
 describe StackAsLinkedList do
   let(:stack) { StackAsLinkedList.new }
 
   describe '#push' do
+    it 'raises error if stack is full' do
+      stack = StackAsLinkedList.new(25)
+      25.times {stack.push('test')}
+      expect{stack.push('test')}.to raise_error('Stack is full')
+    end
+
     it 'updates top to pushed item when stack empty' do
       stack.push('testing123')
       expect(stack.pop).to eq 'testing123'
@@ -123,17 +136,6 @@ describe StackAsLinkedList do
     end
   end
 
-  describe '#empty?' do
-    it 'returns true when the stack is empty' do
-      expect(stack.empty?).to be true
-    end
-
-    it 'returns false when the stack is not empty' do
-      stack.push(13)
-      expect(stack.empty?).to be false
-    end
-  end
-
   describe '#peek' do
     it 'returns the value of the top element of the stack' do
       stack.push('buckaw!')
@@ -158,6 +160,31 @@ describe StackAsLinkedList do
 
     it 'does not alter the stack' do
       expect{stack.height}.to_not change{stack}
+    end
+  end
+
+  describe '#empty?' do
+    it 'returns true when the stack is empty' do
+      expect(stack.send(:empty?)).to be true
+    end
+
+    it 'returns false when the stack is not empty' do
+      stack.push(13)
+      expect(stack.send(:empty?)).to be false
+    end
+  end
+
+  describe '#full?' do
+    it 'returns false when the stack is not full' do
+      stack = StackAsLinkedList.new(25)
+      24.times { stack.push('test') }
+      expect(stack.send(:full?)).to be false
+    end
+
+    it 'returns true when the stack is full' do
+      stack = StackAsLinkedList.new(25)
+      25.times { stack.push('test') }
+      expect(stack.send(:full?)).to be true
     end
   end
 end

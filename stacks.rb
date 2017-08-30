@@ -9,11 +9,12 @@ class StackAsArray
   end
 
   def push(data)
+    raise 'Stack is full' if full?
     @stack.push(data)
   end
 
   def pop
-    raise "Stack is empty" if empty?
+    raise 'Stack is empty' if empty?
     @stack.pop
   end
 
@@ -39,16 +40,18 @@ end
 
 # Stack implementation using Linked List
 class StackAsLinkedList
-  def initialize
+  def initialize(max_size=nil)
     @top = nil
+    @max_size = max_size
   end
 
   def push(data)
+    raise 'Stack is full' if full?
     @top = Node.new(data, @top)
   end
 
   def pop
-    raise "Stack is empty" if empty?
+    raise 'Stack is empty' if empty?
     data = @top.data
     @top = @top.next_node
     data
@@ -60,11 +63,15 @@ class StackAsLinkedList
     @top.nil?
   end
 
+  def full?
+    height == @max_size
+  end
+
   def peek
     @top.data
   end
 
-  # height method iterates through all nodes when called, so takes O(n) time. Could alternatively have a counter class variable that gets incremented or decremented when pushing or popping elements, so that checking height takes O(1) time.
+  # height method iterates through all nodes when called, so takes O(n) time. Could alternatively have a counter variable that gets incremented or decremented when pushing or popping elements, so that checking height takes O(1) time.
   def height
     counter = 0
     current_node = @top
