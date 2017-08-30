@@ -3,8 +3,9 @@ require_relative 'node'
 
 # Stack implementation using Array
 class StackAsArray
-  def initialize
+  def initialize(max_size=nil)
     @stack = Array.new
+    @max_size = max_size
   end
 
   def push(data)
@@ -16,16 +17,22 @@ class StackAsArray
     @stack.pop
   end
 
-  def empty?
-    self.height == 0
-  end
-
   def peek
     @stack[-1]
   end
 
   def height
     @stack.size
+  end
+
+  private
+
+  def empty?
+    height == 0
+  end
+
+  def full?
+    height == @max_size
   end
 end
 
